@@ -1,44 +1,26 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { Header } from 'components/header';
-import { Wrapper } from '../components/wrapper';
-import { Counter } from 'components/counter';
-import { Currency } from 'components/currency';
+import { increment, decrement } from 'modules/counter/actions';
+import { setAmount, setCurrency, fetchRatesIfNeeded } from 'modules/currency/actions';
 
-export class Home extends Component {
-  incrementCounter() {
-    this.props.actions.counter.increment();
-  }
+import { Home } from '../components/home';
 
-  decrementCounter() {
-    this.props.actions.counter.decrement();
-  }
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter,
+    currency: state.currency
+  };
+};
 
-  changeCurrencyAmount(e) {
-    this.props.actions.currency.changeAmount(e.target.value);
-  }
+const mapDispatchToProps = (dispatch) => {
+  dispatch(fetchRatesIfNeeded(['GBP', 'USD', 'EUR']));
 
-  render() {
-    const { state } = this.props;
+  return {
+    onIncrementCounter: () => { dispatch(increment()) },
+    onDecrementCounter: () => { dispatch(decrement()) },
+    onChangeConverterAmount: (amount) => { dispatch(setAmount(amount)) },
+    onChangeConverterCurrency: (currency) => { dispatch(setCurrency(currency)) }
+  };
+};
 
-    return (
-      <div>
-        <Header />
-        <Wrapper title='Counter'>
-          <Counter
-            count={ state.counter }
-            increment={ ::this.incrementCounter }
-            decrement={ ::this.decrementCounter }
-          />
-        </Wrapper>
-        <Wrapper title='Currency'>
-          <Currency
-            amount={ state.currency.amount }
-            converted={ state.currency.converted }
-            onChange={ ::this.changeCurrencyAmount }
-          />
-        </Wrapper>
-      </div>
-    );
-  }
-}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

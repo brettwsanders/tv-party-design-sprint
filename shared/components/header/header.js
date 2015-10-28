@@ -8,8 +8,14 @@ export class Header extends Component {
     const { user } = this.props;
 
     return (
-      <header className={ styles.bright }>
+      <header className={ styles.default }>
         <h1>React Redux Skeleton</h1>
+        <nav>
+          <ul>
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/example'>Example Route</Link></li>
+          </ul>
+        </nav>
       </header>
     );
   }

@@ -1,13 +1,16 @@
+
 # React Redux Skeleton
 
 This project uses [react](https://github.com/facebook/react), [redux](https://github.com/rackt/redux) and [redux-router](https://github.com/rackt/redux-router) as it's basis and forms a skeleton around these tools to allow you to get your app started quickly and easily.
 
 This skeleton is suitable for both small and larger apps with multiple routes and numerous components and connecting to APIs.
 
+It is based on https://medium.com/lexical-labs-engineering/redux-best-practices-64d59775802e, thanks to Will Becker for those pointers.
+
 Install with:
 
 ```
-$ npm i --dev
+$ npm i
 ```
 
 Run the local server with:
@@ -19,16 +22,20 @@ $ npm start
 
 ## Examples
 
-The skeleton comes with two examples:
+The skeleton comes with some examples of routing and components:
 
 1. Counter (demonstrating basic redux usage)
 2. Current converter (more complex data and asynchronous actions with an API middleware)
 
+If you wish to have an entirely clean setup, checkout the `clean` branch.
+
+<!--
 To clean out these examples and start from scratch run:
 
 ```
-$ npm run scratch
+$ ./bin/clean
 ```
+-->
 
 
 ## Components & Containers
@@ -46,6 +53,16 @@ Generic components and containers that you are likely to reuse across multiple r
 Many routes will have components that are specific to them and will likely all have their own container. These should be kept in `routes/my-route/`.
 
 
+## State
+
+Your app's store is configured in `config/store.js`.
+
+
+## Modules: actions, reducers and dispatching
+
+Modules are stored in `modules/`.
+
+
 ## Routes
 
 Your app's routes are defined in `config/routes.js`.
@@ -55,15 +72,16 @@ Your app's routes are defined in `config/routes.js`.
 
 Webpack is configured to allow you to import your local files via aliases instead of long references to relative paths such as `../../../`.
 
-| Alias        | Directory           | Example                                     |
-|--------------|---------------------|---------------------------------------------|
-| `modules`    | `modules/`          | `import example from 'modules/example';`    |
-| `components` | `shared/components` | `import example from 'components/example';` |
-| `containers` | `shared/containers` | `import example from 'containers/example';` |
-| `styles`     | `assets/styles`     | `@import '~styles/mixins/example';`         |
-| `images`     | `assets/images`     | `import logo from 'images/logo.png';`       |
-| `fonts`      | `assets/fonts`      | `src: url('fonts/comic-sans.woff');`        |
+| Alias | Directory | Example |
+|-------|-----------|---------|
+| modules | modules/ | `import example from 'modules/example';` |
+| components | shared/components | `import example from 'components/example';` |
+| containers | shared/containers | `import example from 'containers/example';` |
+| styles     | assets/styles     | `@import '~styles/mixins/example';` |
+| images     | assets/images     | `import logo from 'images/logo.png';` |
+| fonts      | assets/fonts      | `src: url('fonts/comic-sans.woff');` |
 
+<!--
 
 ## Tools
 
@@ -125,3 +143,5 @@ $ ./bin/component my-route-container --route=my-route
 ```
 
 This will create a new container at `routes/my-route/containers/my-route-container`.
+
+-->
